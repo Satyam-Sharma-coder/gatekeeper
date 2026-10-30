@@ -1,0 +1,42 @@
+# Secrets (commit only the *.example files)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Java / Maven
+target/
+HELP.md
+*.class
+*.log
+hs_err_pid*
+
+# Node / Vite
+node_modules/
+dist/
+dist-ssr/
+*.local
+npm-debug.log*
+
+# IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/*
+!.vscode/extensions.json
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated
+.sts4-cache
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local tooling
+.claude/settings.local.json
+.codemie/

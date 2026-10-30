@@ -1,0 +1,13 @@
+{
+  "name": "gatekeeper-docs-tools",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Builds docs/Gatekeeper-Documentation.pdf from the Markdown files in docs/",
+  "scripts": {
+    "build:pdf": "node build-pdf.mjs"
+  },
+  "dependencies": {
+    "marked": "^15.0.0"
+  }
+}
