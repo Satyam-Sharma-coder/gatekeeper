@@ -19,6 +19,7 @@ const SECTIONS = [
   '06-frontend.md',
   '07-end-to-end-flows.md',
   '08-known-issues-and-roadmap.md',
+  '09-testing.md',
 ]
 
 function sectionId(file) {

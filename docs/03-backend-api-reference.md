@@ -185,7 +185,7 @@ Returns a list of `RouteResponse` for every route where `active = true` **and** 
 
 | Service | Endpoint | Response |
 |---|---|---|
-| smart-gateway-service (8080) | `GET /health` | `serviceName`, `serviceDescription`, `appStatus: "UP"` |
+| smart-gateway-service (8080) | `GET /health` | `ServiceName`, `ServiceDescription` (capitalised, verified by test), `appStatus: "UP"` |
 | analytics-service (8082) | `GET /health` | `appName`, `appDescription`, `appHealth: "UP"` |
 
 The field names differ per service. Everything else on these two services requires authentication, and no token validation is configured yet, so every non-health request is rejected.

@@ -29,18 +29,18 @@ public class AuditService {
 
         String actor = authentication == null ? "system" : authentication.getName();
 
-        ControlPlaneAuditRecord record = new ControlPlaneAuditRecord();
-        record.setOrganization(organization);
-        record.setActor(actor);
-        record.setAction(action);
-        record.setResourceType(resourceType);
-        record.setResourceId(resourceId);
-        record.setCorrelationId(getCorrelationId());
-        record.setDurationMs((System.nanoTime() - startedAt) / 1000000);
-        record.setResult("SUCCESS");
-        record.setDetails(details);
-        record.setCreatedAt(LocalDateTime.now());
-
+        ControlPlaneAuditRecord record = ControlPlaneAuditRecord.builder()
+                .organization(organization)
+                .actor(actor)
+                .action(action)
+                .resourceType(resourceType)
+                .resourceId(resourceId)
+                .correlationId(getCorrelationId())
+                .durationMs((System.nanoTime() - startedAt) / 1000000)
+                .result("SUCCESS")
+                .details(details)
+                .createdAt(LocalDateTime.now())
+                .build();
         auditRecordRepository.save(record);
     }
 

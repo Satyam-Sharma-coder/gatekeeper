@@ -13,9 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -27,7 +25,9 @@ import java.util.Set;
 @Table(name = "api_routes")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class ApiRoute {
 
     @Id
@@ -55,8 +55,10 @@ public class ApiRoute {
     @CollectionTable(name = "route_allowed_methods",
             joinColumns = @JoinColumn(name = "route_pk"))
     @Column(name = "http_method")
+    @Builder.Default
     private Set<String> allowedMethods = new HashSet<>();
 
     @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<RouteHeaderRule> headerRules = new ArrayList<RouteHeaderRule>();
 }

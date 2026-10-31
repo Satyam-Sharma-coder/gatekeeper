@@ -7,6 +7,7 @@ import in.org.gatekeeper.api_management_service.dto.response.OrganizationRespons
 import in.org.gatekeeper.api_management_service.dto.response.TenantAdminResponse;
 import in.org.gatekeeper.api_management_service.service.OrganizationService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,16 +15,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/platform/organizations")
 public class PlatformOrganizationController {
 
     private final OrganizationService organizationService;
 
-    public PlatformOrganizationController(OrganizationService organizationService) {
-        this.organizationService = organizationService;
-    }
-
-    // CRUD --> organsiation
+    // CRUD --> organization
 
     @PostMapping
     public ResponseEntity<OrganizationResponse> create(

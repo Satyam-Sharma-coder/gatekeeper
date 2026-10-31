@@ -58,10 +58,11 @@ public class RouteService {
             throw new ApiException(HttpStatus.CONFLICT, "Route ID already exists for this organization");
         }
 
-        ApiRoute route = new ApiRoute();
-        route.setOrganization(organization);
-        route.setConfigurationVersion(1L);
-        route.setCreatedAt(LocalDateTime.now());
+        ApiRoute route = ApiRoute.builder()
+                .organization(organization)
+                .configurationVersion(1L)
+                .createdAt(LocalDateTime.now())
+                .build();
         apply(route, request);
         apiRouteRepository.save(route);
 
@@ -188,14 +189,15 @@ public class RouteService {
 
         route.getHeaderRules().clear();
         for(HeaderRuleRequest ruleRequest : request.getHeaderRules()) {
-            RouteHeaderRule rule = new RouteHeaderRule();
-            rule.setRoute(route);
-            rule.setDirection(ruleRequest.getDirection().toUpperCase(Locale.ENGLISH));
-            rule.setAction(ruleRequest.getAction().toUpperCase(Locale.ENGLISH));
-            rule.setHeaderName(ruleRequest.getHeaderName());
-            rule.setHeaderValue(ruleRequest.getHeaderValue());
-            rule.setCreatedAt(LocalDateTime.now());
-            rule.setUpdatedAt(LocalDateTime.now());
+            RouteHeaderRule rule = RouteHeaderRule.builder()
+                    .route(route)
+                    .direction(ruleRequest.getDirection().toUpperCase(Locale.ENGLISH))
+                    .action(ruleRequest.getAction().toUpperCase(Locale.ENGLISH))
+                    .headerName(ruleRequest.getHeaderName())
+                    .headerValue(ruleRequest.getHeaderValue())
+                    .createdAt(LocalDateTime.now())
+                    .updatedAt(LocalDateTime.now())
+                    .build();
             route.getHeaderRules().add(rule);
         }
     }
@@ -259,13 +261,14 @@ public class RouteService {
     }
 
     private void saveVersion(ApiRoute route, String changeType) {
-        RouteConfigurationVersion version = new RouteConfigurationVersion();
-        version.setOrganization(route.getOrganization());
-        version.setRouteId(route.getRouteId());
-        version.setVersionNumber(route.getConfigurationVersion());
-        version.setChangeType(changeType);
-        version.setConfigurationSnapshot(objectMapper.writeValueAsString(RouteResponse.from(route)));
-        version.setCreatedAt(LocalDateTime.now());
+        RouteConfigurationVersion version = RouteConfigurationVersion.builder()
+                .organization(route.getOrganization())
+                .routeId(route.getRouteId())
+                .versionNumber(route.getConfigurationVersion())
+                .changeType(changeType)
+                .configurationSnapshot(objectMapper.writeValueAsString(RouteResponse.from(route)))
+                .createdAt(LocalDateTime.now())
+                        .build();
         versionRepository.save(version);
     }
 

@@ -18,6 +18,7 @@ Gatekeeper is a multi-tenant API gateway platform made of three Spring Boot serv
 | Work on the React UI | [06 - Frontend](06-frontend.md) |
 | Follow a scenario step by step | [07 - End-to-end flows](07-end-to-end-flows.md) |
 | Know what is missing or risky | [08 - Known issues and roadmap](08-known-issues-and-roadmap.md) |
+| Run or extend the tests | [09 - Testing](09-testing.md) |
 
 `architecture.md` in this folder is an earlier machine-generated snapshot. It predates the route-management work and the finished UI, so where it disagrees with the files above, the files above are correct.
 

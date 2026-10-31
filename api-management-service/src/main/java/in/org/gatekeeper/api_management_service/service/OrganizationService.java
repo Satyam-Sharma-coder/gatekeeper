@@ -51,12 +51,13 @@ public class OrganizationService {
 
         checkUnique(request.getName(), request.getSlug(), null);
 
-        Organization organization = new Organization();
-        organization.setName(request.getName());
-        organization.setSlug(request.getSlug());
-        organization.setStatus(OrganizationStatus.PENDING);
-        organization.setCreatedAt(LocalDateTime.now());
-        organization.setUpdatedAt(LocalDateTime.now());
+        Organization organization = Organization.builder()
+                .name(request.getName())
+                .slug(request.getSlug())
+                .status(OrganizationStatus.PENDING)
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
 
         organizationRepository.save(organization);
 
@@ -149,14 +150,15 @@ public class OrganizationService {
                 .orElseThrow(() -> new ApiException(HttpStatus.INTERNAL_SERVER_ERROR,
                         "TENANT_ADMIN role is missing"));
 
-        ManagementUser user = new ManagementUser();
-        user.setOrganization(organization);
-        user.setRole(role);
-        user.setUsername(request.getUsername());
-        user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
-        user.setEnabled(request.isEnabled());
-        user.setCreatedAt(LocalDateTime.now());
-        user.setUpdatedAt(LocalDateTime.now());
+        ManagementUser user = ManagementUser.builder()
+                .organization(organization)
+                .role(role)
+                .username(request.getUsername())
+                .passwordHash(passwordEncoder.encode(request.getPassword()))
+                .enabled(request.isEnabled())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
         managementUserRepository.save(user);
 
         auditService.record(organization, "CREATE_TENANT_ADMIN",

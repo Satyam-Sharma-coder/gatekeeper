@@ -46,8 +46,8 @@ Enforced by a unique constraint. Tenant user management (the **Users** page) is 
 ### 14. Inconsistent health responses and mislabelled config
 The three `/health` responses use different field names, and `info.app.*` in `api-management-service` and `analytics-service` is copied from the gateway ("Custom API Gateway for routing, security and processing"). `HealthService` swallows database errors with `System.out.println` rather than a logger.
 
-### 15. Tests
-Each service has only the generated `contextLoads` test, which needs a reachable MySQL and the committed configuration. The UI has no test runner. There are no automated tests for route management, tenant isolation or the UI.
+### 15. Test coverage gaps
+The automated suites are described in [09 - Testing](09-testing.md). Remaining gaps: Flyway migrations are not run against MySQL, code coverage is not measured, and the UI has no test runner.
 
 ### 16. Repository hygiene
 The workspace has no `.git` directory, no CI configuration, no Docker or compose file, and no root build file. The UI components folder is spelled `componenets`.

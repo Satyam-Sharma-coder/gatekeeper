@@ -38,11 +38,11 @@ In IntelliJ, set the run configuration's working directory to this folder, or de
 | `JWT_SECRET` | `.env` or environment | HS256 signing key, at least 32 characters |
 | `security.jwt.expiration-seconds` | `application.properties` | Token lifetime (3600) |
 
-The application will not start without all four variables. A value that does not start with `jdbc:` fails with `'url' must start with "jdbc"`, and a placeholder written without the `$` (`{DB_URL}` instead of `${DB_URL}`) causes the same error. The generated `contextLoads` test needs them too, plus a reachable MySQL.
+The application will not start without all four variables. The tests do not need them (they use H2 and `src/test/resources/application.properties`). A value that does not start with `jdbc:` fails with `'url' must start with "jdbc"`, and a placeholder written without the `$` (`{DB_URL}` instead of `${DB_URL}`) causes the same error.
 
 ## Build and test
 
 ```bash
 ./mvnw clean package
-./mvnw test
+./mvnw test        # 379 tests, no database needed; see docs/09-testing.md
 ```
